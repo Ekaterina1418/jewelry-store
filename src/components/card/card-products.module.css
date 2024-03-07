@@ -9,7 +9,7 @@
 }
 
 .card__image {
-  background: url('src/image/jewelry.jpg');
+  background: url('/image/jewelry.jpg');
   background-size: cover;
   border-radius: 10px 10px 0 0;
   overflow: hidden;

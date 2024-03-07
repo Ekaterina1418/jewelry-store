@@ -5,6 +5,6 @@ const timestamp = new Date().toISOString().split('T')[0].replace(/-/g, '')
 const authString = `${password}_${timestamp}`
 const xAuth = md5(authString)
 
-export const url = 'http://api.valantis.store:40000/'
+export const url = 'https://api.valantis.store:41000/'
 
 export default xAuth
