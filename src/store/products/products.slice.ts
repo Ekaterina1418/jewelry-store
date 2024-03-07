@@ -13,6 +13,7 @@ const initialState: ProductState = {
     error: null,
     currentPage: 1,
     totalPages: 0,
+    sortBy: "none",
 };
 
 export const fetchIdProducts = createAsyncThunk(
@@ -49,12 +50,13 @@ export const fetchIdProducts = createAsyncThunk(
         }
     }
 );
+
 export const fetchProducts = createAsyncThunk(
     "products/fetch",
     async (_, { getState, rejectWithValue }) => {
         try {
             const { ids } = (getState() as RootState).products;
-            
+
             const response = await axios.post(
                 `${url}`,
                 {
@@ -68,21 +70,19 @@ export const fetchProducts = createAsyncThunk(
                     },
                 }
             );
-          
-        return response.data.result;
-            
-            
+
+            return response.data.result;
         } catch (error) {
-            if (axios.isAxiosError(error)) {
-                const axiosError = error as AxiosError;
-                if (axiosError.response) {
-                    console.error("Error response:", axiosError.response.data);
-                }
-                return rejectWithValue(axiosError.response?.data);
-            } else {
-                console.error("Unexpected error:", (error as Error).message);
-                return rejectWithValue("Unexpected error");
+            console.error("API request failed:", error);
+            const axiosError = error as AxiosError;
+
+            if (axiosError.response?.status === 500) {
+                console.log("Retrying request...");
             }
+
+            return rejectWithValue(
+                (error as Error).message || "Failed to fetch products"
+            );
         }
     }
 );
@@ -94,7 +94,9 @@ const productSlice = createSlice({
         setCurrentPage: (state, action: PayloadAction<number>) => {
             state.currentPage = action.payload;
         },
-       
+        setSortBy: (state, action: PayloadAction<ProductState["sortBy"]>) => {
+            state.sortBy = action.payload;
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(fetchIdProducts.pending, (state) => {
@@ -127,19 +129,24 @@ const productSlice = createSlice({
                 state.loading = false;
                 state.products = action.payload;
                 state.error = null;
-                // Если вы хотите оставить только уникальные элементы, обработайте это здесь
-                // Пример, если id уникальны
-                const uniqueProductIds = new Set(
-                    state.products.map((product) => product.id)
-                );
-                state.products = state.products.filter((product) =>
-                    uniqueProductIds.has(product.id)
-                );
+                const uniqueProductIds = new Set<string | number>();
+
+                state.products = state.products.filter((product) => {
+                    const itemId = product.id;
+                    if (itemId !== null) {
+                        const isUnique = !uniqueProductIds.has(itemId);
+                        uniqueProductIds.add(itemId);
+                        return isUnique;
+                    }
+                    return false;
+                });
+
                 state.totalPages = Math.ceil(
                     state.products.length / ITEMS_PER_PAGE
                 );
             }
         );
+
         builder.addCase(
             fetchProducts.rejected,
             (state, action: PayloadAction<any>) => {
@@ -152,5 +159,4 @@ const productSlice = createSlice({
 });
 
 export default productSlice.reducer;
-export const { setCurrentPage } = productSlice.actions;
-
+export const { setCurrentPage, setSortBy } = productSlice.actions;

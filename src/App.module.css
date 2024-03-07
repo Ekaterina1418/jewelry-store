@@ -42,9 +42,8 @@ body {
 }
 .container {
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 25px;
   flex-wrap: wrap;
   margin-bottom: 50px;
  
@@ -52,7 +51,7 @@ body {
 .title {
   margin:0 auto;
   font-size: 3rem;
-  margin-bottom: 30px;
+  margin: 30px auto;
 }
 .pagination {
   padding-bottom: 50px;
@@ -68,4 +67,11 @@ body {
 }
 .pagination_btn:last-child {
   margin-left: 10px;
+}
+
+
+@media(max-width:425px) {
+  .title {
+    font-size: 2rem;
+  }
 }
