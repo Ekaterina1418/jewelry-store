@@ -31,13 +31,13 @@ ol[role='list'] {
 html,
 body {
   height: 100%;
-  font-family:  'JetBrainsMono';
+  font-family: 'JetBrainsMono';
 }
 
 .wrapper {
   max-width: 1400px;
   margin: auto;
-  padding:0 2rem;
+  padding: 0 2rem;
   text-align: center;
 }
 .container {
@@ -46,10 +46,9 @@ body {
   gap: 25px;
   flex-wrap: wrap;
   margin-bottom: 50px;
- 
 }
 .title {
-  margin:0 auto;
+  margin: 0 auto;
   font-size: 3rem;
   margin: 30px auto;
 }
@@ -57,10 +56,10 @@ body {
   padding-bottom: 50px;
 }
 .pagination_btn {
- padding: 5px 15px;
- background-color: rgb(218, 218, 226);
- border: none;
- border-radius: 5px;
+  padding: 5px 15px;
+  background-color: rgb(218, 218, 226);
+  border: none;
+  border-radius: 5px;
 }
 .pagination_btn:first-child {
   margin-right: 10px;
@@ -69,9 +68,11 @@ body {
   margin-left: 10px;
 }
 
-
-@media(max-width:425px) {
+@media (max-width: 425px) {
   .title {
     font-size: 2rem;
+  }
+  .container {
+    gap: 0;
   }
 }

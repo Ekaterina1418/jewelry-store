@@ -1,0 +1,9 @@
+.not__found {
+  font-size: 3rem;
+  margin: auto;
+}
+@media (max-width: 768px) {
+  .not__found {
+    font-size: 1.2rem;
+  }
+}
