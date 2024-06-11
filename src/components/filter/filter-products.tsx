@@ -1,16 +1,17 @@
-import style from './filter-products.module.css'
-import { ChangeEvent } from 'react'
+import style from "./filter-products.module.css";
+import { ChangeEvent } from "react";
 
 type Props = {
-  handleSortByLowestPrice: () => void
-  handleSortByHighestPrice: () => void
-  handleBrandFilterChange: (e: ChangeEvent<HTMLSelectElement>) => void
-  handleFilterApply: () => void
-  handleFilterReset: () => void
-  handleNameFilterChange: (e: ChangeEvent<HTMLInputElement>) => void
-  newBrand: string | null
-  valueName: string
-}
+  handleSortByLowestPrice: () => void;
+  handleSortByHighestPrice: () => void;
+  handleBrandFilterChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+  handleFilterApply: () => void;
+  handleFilterReset: () => void;
+  handleNameFilterChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  newBrand: string | null;
+  valueName: string;
+  brands: string[];
+};
 
 export const FilterProducts = ({
   handleSortByLowestPrice,
@@ -21,6 +22,7 @@ export const FilterProducts = ({
   handleNameFilterChange,
   newBrand,
   valueName,
+  brands,
 }: Props) => {
   return (
     <>
@@ -35,20 +37,18 @@ export const FilterProducts = ({
         <label>
           <select
             className={style.filters__select}
-            value={newBrand || ''}
+            value={newBrand || ""}
             onChange={handleBrandFilterChange}
           >
             <option value="">Выберите бренд</option>
-            <option value="Baraka">Baraka</option>
-            <option value="Piaget">Piaget</option>
-            <option value="Jacob  & Co">Jacob & Co</option>
-            <option value="Bibigi">Bibigi</option>
-            <option value="Cartier">Cartier</option>
+            <option value=""></option>
+            {brands.map((singleBrand,index) => (
+              <option key={index} value={singleBrand}>
+                {singleBrand}
+              </option>
+            ))}
           </select>
         </label>
-        <button className={style.button} onClick={handleFilterApply}>
-          Применить фильтры
-        </button>
         <button className={style.button} onClick={handleFilterReset}>
           Сбросить фильтры
         </button>
@@ -60,5 +60,5 @@ export const FilterProducts = ({
         onChange={handleNameFilterChange}
       />
     </>
-  )
-}
+  );
+};

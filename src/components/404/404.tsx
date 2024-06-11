@@ -1,3 +1,4 @@
+import React from 'react'
 import style from './404.module.css'
 
 export const Error = () => {

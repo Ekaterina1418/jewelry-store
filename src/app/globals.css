@@ -1,0 +1,79 @@
+@font-face {
+  font-family: 'JetBrainsMono';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../fonts/JetBrainsMono-VariableFont_wght_1.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'JetBrainsMono';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/JetBrainsMono-VariableFont_wght.woff') format('woff');
+
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: 'JetBrainsMono';
+}
+
+.wrapper {
+  max-width: 1400px;
+  margin: auto;
+  padding: 0 2rem;
+  text-align: center;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+}
+.title {
+  margin: 0 auto;
+  font-size: 3rem;
+  margin: 30px auto;
+}
+.pagination {
+  padding-bottom: 50px;
+}
+.pagination_btn {
+  padding: 5px 15px;
+  background-color: rgb(218, 218, 226);
+  border: none;
+  border-radius: 5px;
+}
+.pagination_btn:first-child {
+  margin-right: 10px;
+}
+.pagination_btn:last-child {
+  margin-left: 10px;
+}
+
+@media (max-width: 425px) {
+  .title {
+    font-size: 2rem;
+  }
+  .container {
+    gap: 0;
+  }
+}
