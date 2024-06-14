@@ -14,6 +14,7 @@ export interface ProductState {
   currentPage: number;
   totalPages: number;
   sortBy: "ascending" | "descending" | "none";
+  selectedProduct: Product | null;
 }
 
 export interface FilterState {

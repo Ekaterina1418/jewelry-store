@@ -1,12 +1,13 @@
 "use client";
 
 import { Provider } from "react-redux";
-import { store } from './index';
-import { ReactNode } from "react";
-interface Props {
-    children: ReactNode;
-}
+import { store} from "@/lib/index";
 
-export default function StoreProvider({ children }:Props) {
-    return <Provider store={store}>{children}</Provider>;
+export default function StoreProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  ;
+  return <Provider store={store}>{children}</Provider>;
 }

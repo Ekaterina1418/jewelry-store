@@ -1,4 +1,3 @@
-"use client";
 import axios, { AxiosError } from "axios";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import xAuth from "../../../api/requestBody";
@@ -13,6 +12,7 @@ const initialState: ProductState = {
   currentPage: 1,
   totalPages: 0,
   sortBy: "none",
+  selectedProduct: null,
 };
 
 export const fetchProducts = createAsyncThunk(
@@ -56,6 +56,9 @@ const productSlice = createSlice({
     setSortBy: (state, action: PayloadAction<ProductState["sortBy"]>) => {
       state.sortBy = action.payload;
     },
+    setSelectedProduct: (state, action: PayloadAction<Product | null>) => {
+      state.selectedProduct = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchProducts.pending, (state) => {
@@ -68,7 +71,6 @@ const productSlice = createSlice({
         state.loading = false;
         state.products = action.payload;
         state.error = null;
-      
 
         state.totalPages = Math.ceil(state.products.length / ITEMS_PER_PAGE);
       }
@@ -87,4 +89,4 @@ const productSlice = createSlice({
 });
 
 export default productSlice.reducer;
-export const { setCurrentPage, setSortBy } = productSlice.actions;
+export const { setCurrentPage, setSortBy, setSelectedProduct } = productSlice.actions;

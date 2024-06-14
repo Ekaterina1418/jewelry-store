@@ -95,7 +95,6 @@ body {
 }
 
 .card-products_card__image__Nfr8O {
- 
   background-size: cover;
   border-radius: 10px 10px 0 0;
   overflow: hidden;
@@ -108,10 +107,13 @@ body {
   height: 180px;
   flex-direction: column;
   justify-content: space-between;
+  list-style-type: none;
 }
 .card-products_card__brand__cr1oQ {
   padding-top: 10px;
+  
 }
+
 .card-products_card__name__aPtQn {
   color: #000;
   font-size: 18px;
@@ -266,5 +268,39 @@ body {
     font-size: 0.75rem;
     padding: 8px 8px;
   }
+}
+
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[7].use[3]!./src/components/Modal/product-modal.module.css ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************/
+.product-modal_popup_overlay__EyGBM {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.product-modal_popup_content__veLsP {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  padding: 50px;
+  border-radius: 5px;
+  max-width: 100%;
+  max-height: 90%;
+  overflow: auto;
+  z-index: 1001;
+}
+.product-modal_popup_btn__8_PKP {
+  align-self: end;
+  border: none;
+  background: transparent;
+  font-size: 22px;
 }
 

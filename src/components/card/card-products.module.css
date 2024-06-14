@@ -9,7 +9,6 @@
 }
 
 .card__image {
- 
   background-size: cover;
   border-radius: 10px 10px 0 0;
   overflow: hidden;
@@ -22,10 +21,13 @@
   height: 180px;
   flex-direction: column;
   justify-content: space-between;
+  list-style-type: none;
 }
 .card__brand {
   padding-top: 10px;
+  
 }
+
 .card__name {
   color: #000;
   font-size: 18px;

@@ -1,4 +1,4 @@
-"use client";
+
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { FilterState } from "../../../types";
 

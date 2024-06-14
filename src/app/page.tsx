@@ -1,7 +1,8 @@
 "use client";
 import React, { useEffect, useState, ChangeEvent } from "react";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
+import { Product } from "@/types";
 import { fetchProducts } from "../lib/features/products/products.slice";
 import "../app/globals.css";
 import { RootState } from "../lib/index";
@@ -22,13 +23,13 @@ import {
 } from "../lib/features/filter/filters.slice";
 import { FilterProducts } from "../components/filter/filter-products";
 import { useSelector } from "react-redux";
-
+import { Modal } from "@/components/Modal/product-modal";
 function PageMain() {
   const dispatch: AppDispatch = useAppDispatch();
+
   const { products, currentPage, totalPages, loading, error } = useSelector(
     (state: RootState) => state.products
   );
-
   const filteredProducts = useAppSelector(selectFilteredProducts);
   const productNameFilter = useAppSelector(
     (state: RootState) => state.filters.productNameFilter
@@ -41,6 +42,9 @@ function PageMain() {
   const [dataLoaded, setDataLoaded] = useState(false);
   const [newPrice, setNewPrice] = useState<number | null>(null);
   const [newBrand, setNewBrand] = useState<string | null>(null);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+
   const brands = Array.from(new Set(products.map((item) => item.brand)));
 
   const handleNameFilterChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -114,10 +118,16 @@ function PageMain() {
     fetchData();
   }, [dispatch]);
 
-  const router = useRouter();
+  const closePopup = () => {
+    setIsPopupOpen(false);
+    setSelectedProduct(null);
+  };
 
-  const handleProductClick = (title: string) => {
-    router.push(`/page-product/${title}`);
+  const handleProductClick = (product: Product) => {
+     const router = useRouter();
+    setSelectedProduct(product);
+    setIsPopupOpen(true);
+     router.push(`/?product=${product.id}`, undefined, { shallow: true });
   };
   return (
     <div className="wrapper">
@@ -144,7 +154,7 @@ function PageMain() {
           {products.length !== 0 &&
             !loading &&
             filteredProducts.map((item) => (
-              <div key={item.id} onClick={() => handleProductClick(item.title)}>
+              <div key={item.id} onClick={() => handleProductClick(item)}>
                 <CardProduct product={item} />
               </div>
             ))}
@@ -171,6 +181,15 @@ function PageMain() {
           </div>
         )}
       </section>
+      {selectedProduct && isPopupOpen && (
+        <Modal
+          isOpen={isPopupOpen}
+          onRequestClose={closePopup}
+          selectedProduct={selectedProduct}
+        >
+          <CardProduct product={selectedProduct} />
+        </Modal>
+      )}
     </div>
   );
 }
