@@ -17,7 +17,6 @@ export const FilterProducts = ({
   handleSortByLowestPrice,
   handleSortByHighestPrice,
   handleBrandFilterChange,
-  handleFilterApply,
   handleFilterReset,
   handleNameFilterChange,
   newBrand,

@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 import style from "./card-products.module.css";
 
 type Props = {
@@ -12,25 +12,23 @@ type Props = {
 };
 
 export const CardProduct = ({ product }: Props) => {
-  const [isopen, setIsOpen] = useState<boolean>(false)
+
   const brandStyle = product.title !== null ? style.card__brand : undefined;
   return (
     <>
-     
-        <div className={style.card}>
-          <img
-            src={product.images[0]}
-            className={style.card__image}
-            alt="Product Image"
-          />
+      <div className={style.card}>
+        <img
+          src={product.images[0]}
+          className={style.card__image}
+          alt="Product Image"
+        />
 
-          <ul className={style.card__list} role="list">
-            <li className={brandStyle}>{product.title}</li>
-            <li className={style.card__name}>{product.category}</li>
-            <li className={style.card_price}>{product.price} ₽</li>
-          </ul>
-        </div>
-    
+        <ul className={style.card__list} role="list">
+          <li className={brandStyle}>{product.title}</li>
+          <li className={style.card__name}>{product.category}</li>
+          <li className={style.card_price}>{product.price} ₽</li>
+        </ul>
+      </div>
     </>
   );
 };

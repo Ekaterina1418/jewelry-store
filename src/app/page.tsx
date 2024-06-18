@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState, ChangeEvent } from "react";
 import axios from "axios";
-import { useRouter } from "next/router";
+import { useRouter, usePathname } from "next/navigation";
 import { Product } from "@/types";
 import { fetchProducts } from "../lib/features/products/products.slice";
 import "../app/globals.css";
@@ -24,8 +24,11 @@ import {
 import { FilterProducts } from "../components/filter/filter-products";
 import { useSelector } from "react-redux";
 import { Modal } from "@/components/Modal/product-modal";
+
 function PageMain() {
   const dispatch: AppDispatch = useAppDispatch();
+   const router = useRouter();
+   const pathname = usePathname();
 
   const { products, currentPage, totalPages, loading, error } = useSelector(
     (state: RootState) => state.products
@@ -53,7 +56,6 @@ function PageMain() {
     if (value === "") {
       dispatch(setBrandFilter(null));
       dispatch(setSortBy("none"));
-
       dispatch(setPriceFilter(null));
     }
   };
@@ -93,42 +95,45 @@ function PageMain() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (products) {
-          await dispatch(fetchProducts());
-        }
-
+        await dispatch(fetchProducts());
         setDataLoaded(true);
       } catch (error) {
         console.error("API request failed:", error);
-
         if (axios.isAxiosError(error) && error.response?.status === 500) {
           console.log("Retrying request...");
-
-          if (products) {
-            await dispatch(fetchProducts());
-          }
-
+          await dispatch(fetchProducts());
           setDataLoaded(true);
         } else {
           console.error("Non-retryable error:", (error as Error).message);
         }
       }
     };
-
     fetchData();
   }, [dispatch]);
 
-  const closePopup = () => {
-    setIsPopupOpen(false);
-    setSelectedProduct(null);
-  };
+   const handleProductClick = (product: Product) => {
+     setSelectedProduct(product);
+     setIsPopupOpen(true);
+     router.push(`/?product=${product.id}`, undefined);
+   };
 
-  const handleProductClick = (product: Product) => {
-     const router = useRouter();
-    setSelectedProduct(product);
-    setIsPopupOpen(true);
-     router.push(`/?product=${product.id}`, undefined, { shallow: true });
-  };
+   const closePopup = () => {
+     setIsPopupOpen(false);
+     setSelectedProduct(null);
+     router.push("/", undefined);
+   };
+
+   useEffect(() => {
+     const query = new URLSearchParams(window.location.search);
+     const productId = query.get("product");
+     if (productId) {
+       const product = products.find((p) => p.id.toString() === productId);
+       if (product) {
+         setSelectedProduct(product);
+         setIsPopupOpen(true);
+       }
+     }
+   }, [pathname, products]);
   return (
     <div className="wrapper">
       <h1 className="title">Наши товары</h1>
@@ -149,7 +154,6 @@ function PageMain() {
           {!loading && !error && dataLoaded && products.length === 0 && (
             <Error />
           )}
-
           {!loading && error && <Error />}
           {products.length !== 0 &&
             !loading &&
