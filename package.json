@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "next build && copyfiles .next/** dist/",
+    "build": "next build",
     "clean": "next clean",
     "export": "next export",
     "start": "next start",
