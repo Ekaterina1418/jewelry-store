@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "next build && copyfiles index.html dist",
+   "build": "next build && mkdir dist && xcopy .\\.next\\static\\* dist\\ /s /e /y",
+    "clean": "next clean",
     "export": "next export",
     "start": "next start",
     "lint": "eslint ."

@@ -1,7 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // output: "export", // Outputs a Single-Page Application (SPA).
-  output: "dist",
+  output: "export",
+  distDir: "dist",
+  images: {
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;
