@@ -9,7 +9,7 @@ module.exports = {
     "plugin:@typescript-eslint/recommended",
     "next/core-web-vitals",
   ],
-  ignorePatterns: ["dist", ".eslintrc.cjs"],
+  ignorePatterns: [".eslintrc.cjs"],
   parser: "@typescript-eslint/parser",
   plugins: ["@typescript-eslint", "react-refresh"],
   rules: {
