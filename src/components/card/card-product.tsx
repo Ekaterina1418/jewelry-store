@@ -18,7 +18,7 @@ export const CardProduct = ({ product }: Props) => {
       <div className={style.card}>
         <Image
           src={product.images[0]}
-          height={300}
+          height={200}
           width={200}
           className={style.card__image}
           alt="Product Image"

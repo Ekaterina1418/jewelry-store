@@ -3,7 +3,7 @@ const nextConfig = {
   output: "export",
   images: {
     domains: ["cdn.dummyjson.com"],
-    loader: "default",
+    unoptimized: true,
   },
 };
 
