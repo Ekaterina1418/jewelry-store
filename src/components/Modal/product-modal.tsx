@@ -1,9 +1,8 @@
-"use client"
+"use client";
 import style from "./product-modal.module.css";
 import { Product } from "@/types";
 import { ReactNode } from "react";
 import { Dialog, DialogPanel } from "@headlessui/react";
-
 
 type Props = {
   children: ReactNode;
@@ -18,10 +17,6 @@ export const Modal = ({
   onRequestClose,
   selectedProduct,
 }: Props) => {
-  
-
-
-
   return (
     <>
       {isOpen && selectedProduct && (
