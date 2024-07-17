@@ -1,6 +1,5 @@
 import axios, { AxiosError } from "axios";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import xAuth from "../../../api/requestBody";
 import { Product, ProductState } from "../../../types";
 import { url } from "../../../api/requestBody";
 import { ITEMS_PER_PAGE } from "../../../utils/constants";
@@ -25,7 +24,6 @@ export const fetchProducts = createAsyncThunk(
         {
           headers: {
             "Content-Type": "application/json",
-            "X-Auth": xAuth,
           },
         }
       );
@@ -89,4 +87,5 @@ const productSlice = createSlice({
 });
 
 export default productSlice.reducer;
-export const { setCurrentPage, setSortBy, setSelectedProduct } = productSlice.actions;
+export const { setCurrentPage, setSortBy, setSelectedProduct } =
+  productSlice.actions;

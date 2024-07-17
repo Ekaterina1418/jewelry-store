@@ -1,4 +1,4 @@
-
+import Image from "next/image";
 import style from "./card-products.module.css";
 
 type Props = {
@@ -12,12 +12,11 @@ type Props = {
 };
 
 export const CardProduct = ({ product }: Props) => {
-
   const brandStyle = product.title !== null ? style.card__brand : undefined;
   return (
     <>
       <div className={style.card}>
-        <img
+        <Image
           src={product.images[0]}
           className={style.card__image}
           alt="Product Image"
