@@ -16,13 +16,13 @@ export const CardProduct = ({ product }: Props) => {
   return (
     <>
       <div className={style.card}>
-        <Image
-          src={product.images[0]}
-          height={200}
-          width={200}
-          className={style.card__image}
-          alt="Product Image"
-        />
+<Image
+  src={product.images[0]}
+  height={200}
+  width={200}
+  className={style.card__image}
+  alt="Product Image"
+/>
 
         <ul className={style.card__list} role="list">
           <li className={brandStyle}>{product.title}</li>

@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "export",
+  output: 'export',
   images: {
-    domains: ["cdn.dummyjson.com"],
+    domains: ['cdn.dummyjson.com', 'dummyjson.com'],
     unoptimized: true,
   },
-};
+}
 
-export default nextConfig;
+export default nextConfig

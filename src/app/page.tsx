@@ -92,24 +92,25 @@ function PageMain() {
     dispatch(setProductNameFilter(""));
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
+ useEffect(() => {
+  const fetchData = async () => {
+    try {
+      await dispatch(fetchProducts());
+      setDataLoaded(true);
+    } catch (error) {
+      console.error("API request failed:", error);
+      if (axios.isAxiosError(error) && error.response?.status === 500) {
+        console.log("Retrying request...");
         await dispatch(fetchProducts());
         setDataLoaded(true);
-      } catch (error) {
-        console.error("API request failed:", error);
-        if (axios.isAxiosError(error) && error.response?.status === 500) {
-          console.log("Retrying request...");
-          await dispatch(fetchProducts());
-          setDataLoaded(true);
-        } else {
-          console.error("Non-retryable error:", (error as Error).message);
-        }
+      } else {
+        console.error("Non-retryable error:", (error as Error).message);
       }
-    };
-    fetchData();
-  }, [dispatch]);
+    }
+  };
+  fetchData();
+}, [dispatch]);
+
 
   const handleProductClick = (product: Product) => {
     setSelectedProduct(product);
