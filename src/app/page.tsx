@@ -3,25 +3,25 @@ import React, { useEffect, useState, ChangeEvent } from "react";
 import axios from "axios";
 import { useRouter, usePathname } from "next/navigation";
 import { Product } from "@/types";
-import { fetchProducts } from "../lib/features/products/products.slice";
-import "../app/globals.css";
-import { RootState } from "../lib/index";
-import { AppDispatch } from "../lib/index";
-import { useAppSelector, useAppDispatch } from "../lib/hooks";
-import { CardProduct } from "../components/card/card-product";
-import { Loader } from "../components/loader/loader";
-import { Error } from "../components/404/404";
+import { fetchProducts } from "@/lib/features/products/products.slice";
+import "@/app/globals.css";
+import { RootState } from "@/lib/index";
+import { AppDispatch } from "@/lib/index";
+import { useAppSelector, useAppDispatch } from "@/lib/hooks";
+import { CardProduct } from "@/components/card/card-product";
+import { Loader } from "@/components/loader/loader";
+import { Error } from "@/components/404/404";
 import {
   setCurrentPage,
   setSortBy,
-} from "../lib/features/products/products.slice";
-import { selectFilteredProducts } from "../lib/features/filter/selectors";
+} from "@/lib/features/products/products.slice";
+import { selectFilteredProducts } from "@/lib/features/filter/selectors";
 import {
   setBrandFilter,
   setPriceFilter,
   setProductNameFilter,
-} from "../lib/features/filter/filters.slice";
-import { FilterProducts } from "../components/filter/filter-products";
+} from "@/lib/features/filter/filters.slice";
+import { FilterProducts } from "@/components/filter/filter-products";
 import { useSelector } from "react-redux";
 import { Modal } from "@/components/Modal/product-modal";
 
