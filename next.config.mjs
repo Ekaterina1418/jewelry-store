@@ -1,8 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
+  basePath: '/jewelry-store',
+  assetPrefix: '/jewelry-store/',
   images: {
-    domains: ['cdn.dummyjson.com', 'dummyjson.com'],
     unoptimized: true,
   },
 }
